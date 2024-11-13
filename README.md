@@ -15,6 +15,11 @@ The **Isochronic Tone Generator** is a desktop application that generates custom
 
 ## Installation
 
+### Download the Executable
+For those who prefer a precompiled executable, you can download it from the [Releases page](https://github.com/jdolinschi/Isochronator/releases/tag/v1.0.0).
+
+To run it with python:
+
 1. **Ensure you have Python 3.x installed**. If not, download and install it from [python.org](https://www.python.org/).
 2. **Install the required dependencies**:
    ```bash
