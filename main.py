@@ -11,7 +11,6 @@ class IsochronicToneGeneratorApp(tk.Tk):
         super().__init__()
         self.title("Isochronic Tone Generator")
         self.geometry("350x450")  # Adjust size to accommodate new layout
-        # Set minimum size of window
         self.minsize(350, 450)
         self.maxsize(350, 450)
         self.running = False
@@ -52,6 +51,9 @@ class IsochronicToneGeneratorApp(tk.Tk):
         self.init_ui()
 
     def init_ui(self):
+        # Validation for numeric inputs
+        validate_numeric = self.register(self.validate_numeric_input)
+
         # Frames for presets, inputs, controls, and buttons
         presets_frame = tk.Frame(self)
         inputs_frame = tk.Frame(self)
@@ -65,7 +67,6 @@ class IsochronicToneGeneratorApp(tk.Tk):
         buttons_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky="ew")
         status_frame.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="ew")
 
-        # Presets Dropdown
         # Presets Dropdown
         self.presets = {
             "Custom": {
@@ -127,19 +128,23 @@ class IsochronicToneGeneratorApp(tk.Tk):
 
         # Input Fields
         tk.Label(inputs_frame, text="Tone Frequency (Hz):").grid(row=0, column=0, sticky="w")
-        self.frequency_entry = tk.Entry(inputs_frame, textvariable=self.frequency)
+        self.frequency_entry = tk.Entry(inputs_frame, textvariable=self.frequency, validate="key",
+                                        validatecommand=(validate_numeric, "%P"))
         self.frequency_entry.grid(row=1, column=0, sticky="w")
 
         tk.Label(inputs_frame, text="Start Pulse Frequency (Hz):").grid(row=2, column=0, sticky="w")
-        self.start_pulse_freq_entry = tk.Entry(inputs_frame, textvariable=self.start_pulse_freq)
+        self.start_pulse_freq_entry = tk.Entry(inputs_frame, textvariable=self.start_pulse_freq, validate="key",
+                                               validatecommand=(validate_numeric, "%P"))
         self.start_pulse_freq_entry.grid(row=3, column=0, sticky="w")
 
         tk.Label(inputs_frame, text="Final Pulse Frequency (Hz):").grid(row=4, column=0, sticky="w")
-        self.final_pulse_freq_entry = tk.Entry(inputs_frame, textvariable=self.final_pulse_freq)
+        self.final_pulse_freq_entry = tk.Entry(inputs_frame, textvariable=self.final_pulse_freq, validate="key",
+                                               validatecommand=(validate_numeric, "%P"))
         self.final_pulse_freq_entry.grid(row=5, column=0, sticky="w")
 
         tk.Label(inputs_frame, text="Ramp Time (s):").grid(row=6, column=0, sticky="w")
-        self.ramp_time_entry = tk.Entry(inputs_frame, textvariable=self.ramp_time)
+        self.ramp_time_entry = tk.Entry(inputs_frame, textvariable=self.ramp_time, validate="key",
+                                        validatecommand=(validate_numeric, "%P"))
         self.ramp_time_entry.grid(row=7, column=0, sticky="w")
 
         # Control Fields
@@ -169,13 +174,15 @@ class IsochronicToneGeneratorApp(tk.Tk):
                                                      command=self.update_vary_widgets)
         self.vary_randomly_checkbox.grid(row=7, column=0, sticky="w")
 
-        # New Vary Interval Frame
+        # Vary Interval Frame
         vary_interval_frame = tk.Frame(inputs_frame)
         vary_interval_frame.grid(row=9, column=0, sticky="ew")
 
-        # Inside this frame, create two entries and a label
-        self.vary_interval_start_entry = tk.Entry(vary_interval_frame, textvariable=self.vary_interval_start, width=5)
-        self.vary_interval_end_entry = tk.Entry(vary_interval_frame, textvariable=self.vary_interval_end, width=5)
+        tk.Label(inputs_frame, text="Vary Interval (s):").grid(row=8, column=0, sticky="w")
+        self.vary_interval_start_entry = tk.Entry(vary_interval_frame, textvariable=self.vary_interval_start,
+                                                  validate="key", validatecommand=(validate_numeric, "%P"), width=5)
+        self.vary_interval_end_entry = tk.Entry(vary_interval_frame, textvariable=self.vary_interval_end,
+                                                validate="key", validatecommand=(validate_numeric, "%P"), width=5)
         to_label = tk.Label(vary_interval_frame, text="to")
 
         # Position the entries and label within the frame
@@ -193,7 +200,8 @@ class IsochronicToneGeneratorApp(tk.Tk):
 
         # Vary Amount Entry
         tk.Label(inputs_frame, text="Vary Amount (±Hz):").grid(row=10, column=0, sticky="w")
-        self.vary_amount_entry = tk.Entry(inputs_frame, textvariable=self.vary_amount)
+        self.vary_amount_entry = tk.Entry(inputs_frame, textvariable=self.vary_amount, validate="key",
+                                          validatecommand=(validate_numeric, "%P"))
         self.vary_amount_entry.grid(row=11, column=0, sticky="w")
 
         # Buttons
@@ -208,6 +216,10 @@ class IsochronicToneGeneratorApp(tk.Tk):
         # Status Display
         self.current_freq_label = tk.Label(status_frame, text="Current Pulse Frequency: 0.00 Hz")
         self.current_freq_label.grid(row=0, column=0, sticky="ew")
+
+    def validate_numeric_input(self, value):
+        return value.isdigit() or value == "" or (value.startswith(".") and value[1:].isdigit()) or (
+                value.startswith("-") and value[1:].isdigit())
 
     def update_vary_widgets(self):
         if self.vary_randomly.get():
