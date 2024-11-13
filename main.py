@@ -368,8 +368,8 @@ class IsochronicToneGeneratorApp(tk.Tk):
         self.start_pulse_freq_entry.config(state="normal")
         self.final_pulse_freq_entry.config(state="normal")
         self.ramp_time_entry.config(state="normal")
-        self.sample_rate_combobox.config(state="normal")
-        self.buffer_size_combobox.config(state="normal")
+        self.sample_rate_combobox.config(state="readonly")  # Keep it readonly
+        self.buffer_size_combobox.config(state="readonly")  # Keep it readonly
         self.use_ramp_checkbox.config(state="normal")
         self.preset_dropdown.config(state="readonly")
         self.vary_randomly_checkbox.config(state="normal")
