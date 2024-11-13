@@ -93,3 +93,5 @@ Each preset automatically sets the start and end pulse frequencies, along with a
 ## Acknowledgments
 
 This application provides an easy-to-use tool for exploring the effects of isochronic tones. Whether you're a sound therapy enthusiast or simply curious about brainwave entrainment, this generator offers a flexible way to experiment with sound and frequency settings.
+
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="jdolinschi" data-color="#FFDD00" data-emoji=""  data-font="Poppins" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
