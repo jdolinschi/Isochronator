@@ -4,7 +4,9 @@
 
 ## Overview
 
-The **Isochronic Tone Generator** is a desktop application that generates customizable isochronic tones. Isochronic tones are auditory pulses at specific frequencies often used in sound therapy and brainwave entrainment to promote relaxation, focus, meditation, and other mental states.
+![GUI Screenshot](images/gui.png)
+
+The **Isochronic Tone Generator** is a simple desktop application that generates customizable isochronic tones. Isochronic tones are auditory pulses at specific frequencies often used in sound therapy and brainwave entrainment to promote relaxation, focus, meditation, and other mental states.
 
 ### Key Features
 
